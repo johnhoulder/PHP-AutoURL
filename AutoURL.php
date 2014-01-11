@@ -22,6 +22,7 @@
 				throw new Exception("Parameter 1 expected Array, got ".gettype($replacements),E_WARNING);
 				return false;
 			}
+			$this->sendStatistics();
 		}
 		function buffer($output){
 			chdir(dirname($_SERVER['SCRIPT_FILENAME'])); //Fixes issues with some servers
@@ -35,7 +36,7 @@
 			}
 			return $output;
 		}
-		function sendStatistics(){
+		private function sendStatistics(){
 			if(self::$statisticCollection == true){
 				if(file_exists("/tmp/php-autourl-library.stats")){
 					$data = file_get_contents("/tmp/php-autourl-library.stats");
@@ -44,6 +45,8 @@
 					if($data == "0"){
 						$result = file_get_contents("http://toxic-productions.com/backend/usage.php?product=autourl&server={$_SERVER['SERVER_NAME']}&ip={$_SERVER['SERVER_ADDR']}");
 					}
+				}else{
+					$result = file_get_contents("http://toxic-productions.com/backend/usage.php?product=autourl&server={$_SERVER['SERVER_NAME']}&ip={$_SERVER['SERVER_ADDR']}");
 				}
 				file_put_contents("/tmp/php-autourl-library.stats","1");
 			}
