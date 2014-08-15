@@ -36,7 +36,3 @@ Example script:
   ob_end_flush();
 ?>
 ```
-
-Statistics
-----------
-This library sends minimal usage statistics to our servers. This can be easily disabled at any time by setting `$statisticCollection` to `false` in AutoURL.php. The value can also be retrieved by echoing `AutoURL::$statisticCollection`
